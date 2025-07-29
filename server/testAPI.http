@@ -1,0 +1,83 @@
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOjEsInVzZXJuYW1lIjoibnR0IiwiaWF0IjoxNzUyODQzNDE1LCJleHAiOjE3NTI4NDM0NzV9.hI9CWUepyskEpXy6lLHnXawuOkmKFVfQ3woStdVY4Hc
+@refresh = 
+
+### LOGIN
+
+POST http://localhost:3001/api/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username": "ntt",
+    "password": "password"
+}
+
+### USER INFO
+
+GET http://localhost:3001/api/user HTTP/1.1
+Authorization: Bearer {{token}}
+
+### REFRESH TOKEN
+
+POST http://localhost:3001/api/refresh HTTP/1.1
+Cookie: refreshToken {{refresh}}
+
+### LOGOUT
+
+POST http://localhost:3001/api/logout HTTP/1.1
+Cookie: refreshToken {{refresh}}
+
+### GET FILMS
+GET http://localhost:3001/api/films HTTP/1.1
+Authorization: Bearer {{token}}
+
+### GET FILMS BY ID
+
+GET http://localhost:3001/api/films/2 HTTP/1.1
+Authorization: Bearer {{token}}
+
+### ADD FILM
+
+POST http://localhost:3001/api/films HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "title": "Interstellar",
+    "favorite": true,
+    "watchDate": "2024-12-04",
+    "rating": 5
+}
+
+### FLIP FAVORITE
+
+PATCH http://localhost:3001/api/films/8/favorite HTTP/1.1
+Authorization: Bearer {{token}}
+
+### CHANGE RATING
+
+PATCH http://localhost:3001/api/films/8/rating HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "newRating": 0
+}
+
+### UPDATE FILM
+
+PUT http://localhost:3001/api/films/8 HTTP/1.1
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "newRating": 3,
+    "newFavorite": true,
+    "newWatchDate": "01-01-1970"
+}
+
+### DELETE FILM
+
+DELETE http://localhost:3001/api/films/8 HTTP/1.1
+Authorization: Bearer {{token}}
+
+###
