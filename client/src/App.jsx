@@ -40,14 +40,15 @@ function AppRouted() {
   const [refresh, setRefresh] = useState(false);
   const { token, logout, isLoggedIn } = useAuth();
 
-  useEffect(() => {
-    const handleLogout = async () => {
-      try {
-        await logout();
-      } catch (err) {
-        console.log(`AppRouted.jsx: ${err.message}`);
-      }
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (err) {
+      console.log(`AppRouted.jsx: ${err.message}`);
     }
+  }
+
+  useEffect(() => {
     API.getFilms(token)
       .then((rows) => {
         setFilms(rows);
